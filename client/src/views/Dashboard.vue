@@ -4,4 +4,12 @@
     <p>This is a protected route. You can only see this if you're signed in.</p>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import { onMounted, ref } from "vue";
+import { useToast } from "primevue/usetoast";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/authStore";
+
+const toast = useToast();
+const router = useRouter();
+</script>

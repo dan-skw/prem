@@ -26,10 +26,11 @@
   </form>
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import router from "../../router";
 
 import { signUserIn } from "../../firebase/auth/userAuth";
+import { useAuthStore } from "@/stores/authStore";
 
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
@@ -38,14 +39,30 @@ import InputGroupAddon from "primevue/inputgroupaddon";
 
 const email = ref("");
 const password = ref("");
+const authStore = useAuthStore();
 
 const handleSubmit = async () => {
-  await signUserIn({
-    email: email.value,
-    password: password.value,
-  });
-  router.push("/protected");
+  try {
+    await signUserIn({
+      email: email.value,
+      password: password.value,
+    }).then((user) => {
+      authStore.setUser(user);
+    });
+  } catch (error) {
+    console.error("Sign in error:", error);
+  }
 };
+
+// Watch for changes in the authentication state
+watch(
+  () => authStore.user,
+  (user) => {
+    if (user) {
+      router.push("/protected");
+    }
+  }
+);
 </script>
 <style scoped>
 .wrapper {

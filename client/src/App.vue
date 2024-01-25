@@ -1,8 +1,13 @@
 <template>
-  <Navbar />
-  <RouterView />
+  <MainLayout>
+    <RouterView />
+  </MainLayout>
 </template>
 
 <script setup>
-import Navbar from "@/components/Navbar.vue";
+import MainLayout from "@/components/MainLayout.vue";
+import { useAuthStore } from "@/stores/authStore";
+
+const authStore = useAuthStore();
+authStore.initializeAuthListener();
 </script>

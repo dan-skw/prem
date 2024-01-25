@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { watch } from "vue";
 import { useAuthStore } from "@/stores/authStore";
 
 import HomeView from "../views/HomeView.vue";
@@ -28,20 +29,42 @@ const routes = [
       requiresAuth: true,
     },
   },
+  {
+    path: "/userpanel/:id",
+    name: "User Panel",
+    component: () => import("../views/UserPanel.vue"),
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 });
-
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
-  if (to.meta.requiresAuth && !authStore.user) {
+
+  // Wait for loading to finish
+  if (authStore.isLoading) {
+    const unwatch = watch(
+      () => authStore.isLoading,
+      (isLoading) => {
+        if (!isLoading) {
+          unwatch();
+          if (to.meta.requiresAuth && !authStore.user) {
+            next({ path: "/signin" });
+          } else {
+            next();
+          }
+        }
+      }
+    );
+  } else if (to.meta.requiresAuth && !authStore.user) {
     next({ path: "/signin" });
   } else {
     next();
   }
 });
-
 export default router;
