@@ -70,15 +70,19 @@
         />
       </InputGroup>
     </div>
-
     <Button type="submit" label="Submit" />
+    <p>
+      If you already have an account
+      <RouterLink to="/signin">Sign in</RouterLink>
+    </p>
   </form>
 </template>
 <script setup>
 import { ref } from "vue";
+import router from "../../router";
 import { useToast } from "primevue/usetoast";
 
-import { createUser } from "../../firebase/auth/createUser";
+import { createUser } from "../../firebase/auth/userAuth";
 
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
