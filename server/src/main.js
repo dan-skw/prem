@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { config } from "dotenv";
+import router from "./router.js"; // Make sure to use the correct path
 
 config();
 const app = express();
@@ -9,19 +10,11 @@ app.use(cors());
 
 const port = process.env.PORT;
 
-const items = [
-  { id: 1, name: "item 1" },
-  { id: 2, name: "item 2" },
-  { id: 3, name: "item 3" },
-];
-
 app.get("/", (req, res) => {
   res.send("Hello world!");
 });
 
-app.get("/api/items", (req, res) => {
-  res.json(items);
-});
+app.use("/api", router); // Mount the user routes under '/api'
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

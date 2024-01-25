@@ -4,6 +4,9 @@
     <RouterLink v-if="!isLoggedIn" to="/signup">Signup</RouterLink>
     <RouterLink v-if="!isLoggedIn" to="/signin">Signin</RouterLink>
     <RouterLink v-if="isLoggedIn" to="/protected">Dashboard</RouterLink>
+    <RouterLink v-if="isLoggedIn" :to="`/userpanel/${authStore.user.uid}`"
+      >User Panel</RouterLink
+    >
     <button v-if="isLoggedIn" @click="logout">Sign Out</button>
   </nav>
 </template>
