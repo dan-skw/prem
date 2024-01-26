@@ -69,8 +69,10 @@ import CascadeSelect from "primevue/cascadeselect";
 import InputMask from "primevue/inputmask";
 
 import { ref } from "vue";
+import { useToast } from "primevue/usetoast";
 import addReservation from "@/services/reservationService";
 
+const toast = useToast();
 const reservation = ref({
   fullName: "",
   date: "",
@@ -186,6 +188,12 @@ const handleSubmit = async () => {
   try {
     await addReservation(reservation.value);
     reservation.value = {};
+    toast.add({
+      severity: "success",
+      summary: "Sukces!",
+      detail: "Rezerwacja została dodana.",
+      life: 3000,
+    });
   } catch (error) {
     console.error("Error adding reservation:", error);
   }

@@ -1,8 +1,8 @@
 <template>
-  <section class="wrapper">
+  <div class="form-wrapper">
     <h3>Dodaj pracownika</h3>
     <EmployeeForm @submit="handelAddEmployee" buttonText="Dodaj pracownika" />
-  </section>
+  </div>
 </template>
 
 <script setup>
@@ -30,11 +30,3 @@ const handelAddEmployee = async (employeeData) => {
   }
 };
 </script>
-<style scoped>
-.wrapper {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-}
-</style>

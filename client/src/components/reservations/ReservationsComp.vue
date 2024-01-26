@@ -4,14 +4,14 @@
     <Calendar v-model="date" placeholder="Data rezerwacji" />
     <Button label="Szukaj" @click="fetchReservations" />
 
-    <Panel v-if="reservationsFetched">
+    <ScrollPanel v-if="reservationsFetched">
       <DataTable :value="flattenedReservations">
         <Column field="time" header="Godzina"></Column>
         <Column field="fullName" header="Dane"></Column>
         <Column field="numberOfGuests" header="Liczba gości"></Column>
         <Column field="table.name" header="Stolik"></Column>
       </DataTable>
-    </Panel>
+    </ScrollPanel>
     <Loader v-else />
   </section>
 </template>
@@ -23,7 +23,7 @@ import Calendar from "primevue/calendar";
 import Button from "primevue/button";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
-import Panel from "primevue/panel";
+import ScrollPanel from "primevue/scrollpanel";
 import Loader from "../Loader.vue";
 
 const reservations = ref({});

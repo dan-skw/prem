@@ -1,5 +1,6 @@
 <template>
-  <section>
+  <section class="form-wrapper">
+    <h3>Edytuj dane pracownika</h3>
     <EmployeeForm
       :initialEmployeeData="employee"
       buttonText="Zaaktualizuj dane"
@@ -7,6 +8,7 @@
     />
     <Button
       label="Usuń pracownika"
+      icon="pi pi-trash"
       @click="deleteCurrentEmployee"
       class="p-button-danger"
     />
@@ -72,11 +74,7 @@ const deleteCurrentEmployee = async () => {
 };
 </script>
 <style scoped>
-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+.p-button-danger {
+  margin-top: 1rem;
 }
 </style>

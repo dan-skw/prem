@@ -2,7 +2,7 @@
   <MainLayout>
     <RouterView />
   </MainLayout>
-  <Toast />
+  <Toast position="bottom-center" />
 </template>
 
 <script setup>

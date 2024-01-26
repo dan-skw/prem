@@ -2,34 +2,38 @@
   <section class="wrapper">
     <h2>Lista obecnych pracowników</h2>
     <Loader v-if="loading" />
-    <DataTable :value="employees" v-else>
-      <Column field="name" header="Imię"></Column>
-      <Column field="surname" header="Nazwisko"></Column>
-      <Column field="position.name" header="Stanowisko"></Column>
-      <Column header="Data urodzenia">
-        <template #body="slotProps">
-          {{ formatDate(slotProps.data.birthdate) }}
-        </template>
-      </Column>
-      <Column field="sex" header="Płeć"></Column>
-      <Column field="hourlyRate" header="Stawka godzinowa"></Column>
-      <Column header="Edytuj">
-        <template #body="slotProps">
-          <Button icon="pi pi-pencil" @click="editEmployee(slotProps.data)" />
-        </template>
-      </Column>
-    </DataTable>
+    <ScrollPanel style="width: 100%; height: 100%" v-else>
+      <DataTable :value="employees">
+        <Column field="name" header="Imię"></Column>
+        <Column field="surname" header="Nazwisko"></Column>
+        <Column field="position.name" header="Stanowisko"></Column>
+        <Column header="Data urodzenia">
+          <template #body="slotProps">
+            {{ formatDate(slotProps.data.birthdate) }}
+          </template>
+        </Column>
+        <Column field="sex" header="Płeć"></Column>
+        <Column field="hourlyRate" header="Stawka godzinowa"></Column>
+        <Column header="Edytuj">
+          <template #body="slotProps">
+            <Button icon="pi pi-pencil" @click="editEmployee(slotProps.data)" />
+          </template>
+        </Column> </DataTable
+    ></ScrollPanel>
   </section>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+
 import { getEmployees } from "@/services/employeeService";
+
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Button from "primevue/button";
 import Loader from "../Loader.vue";
-import { useRouter } from "vue-router";
+import ScrollPanel from "primevue/scrollpanel";
 
 const employees = ref([]);
 const router = useRouter();
@@ -57,7 +61,7 @@ const editEmployee = (employee) => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 2rem;
+  justify-content: flex-start;
+  height: max-content;
 }
 </style>

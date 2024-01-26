@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <nav class="card">
     <TabMenu :model="items">
       <template #item="{ item }">
         <router-link
@@ -41,7 +41,7 @@
         </a>
       </template>
     </TabMenu>
-  </div>
+  </nav>
 </template>
 
 <script setup>
@@ -74,6 +74,11 @@ const items = computed(() => {
         label: "Rezerwacje",
         icon: "pi pi-fw pi-book",
         route: "/protected/reservations",
+      },
+      {
+        label: "Grafik",
+        icon: "pi pi-fw pi-calendar",
+        route: "/protected/schedule",
       },
       // {
       //   label: "User Panel",
@@ -112,14 +117,26 @@ const logout = async () => {
   router.push("/signin");
 };
 </script>
+<style scoped>
+@media screen and (max-width: 768px) {
+  .p-tabmenu {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .p-menuitem-text {
+    display: none;
+  }
 
-<style>
-/* Your styles for Navbar */
-nav {
-  /* Example styles */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
+  .p-menuitem-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .p-menuitem-icon {
+    margin-right: 0;
+  }
 }
 </style>
