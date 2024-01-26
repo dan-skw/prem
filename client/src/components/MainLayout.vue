@@ -5,6 +5,7 @@
       <slot></slot>
     </main>
   </div>
+  <Toast />
 </template>
 
 <script setup>

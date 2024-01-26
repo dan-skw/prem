@@ -1,6 +1,7 @@
 <template>
   <MainLayout>
     <RouterView />
+    <Toast />
   </MainLayout>
 </template>
 

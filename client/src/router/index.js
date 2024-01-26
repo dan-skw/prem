@@ -34,6 +34,28 @@ const routes = [
         name: "Reservations",
         component: () => import("../views/Reservations.vue"),
       },
+      {
+        path: "employees",
+        name: "Employees",
+        component: () => import("../views/Employees.vue"),
+        children: [
+          {
+            path: "add",
+            name: "Add Employee",
+            component: () => import("../components/AddEmployee.vue"),
+          },
+          {
+            path: "list",
+            name: "List of Employees",
+            component: () => import("../components/ListEmployee.vue"),
+          },
+          {
+            path: "edit/:id",
+            name: "Edit Employee",
+            component: () => import("../components/EditEmployee.vue"),
+          },
+        ],
+      },
     ],
   },
   {
