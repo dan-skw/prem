@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Reservations</h2>
+    <h2>Znajdź zapisane rezerwacje.</h2>
     <Calendar v-model="date" placeholder="Data rezerwacji" />
     <Button label="Szukaj" @click="fetchReservations" />
 
@@ -16,15 +16,13 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { getReservations } from "@/api/reservations/reservationService";
 import Calendar from "primevue/calendar";
 import Button from "primevue/button";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Panel from "primevue/panel";
-import ColumnGroup from "primevue/columngroup"; // optional
-import Row from "primevue/row";
 
 const reservations = ref({});
 

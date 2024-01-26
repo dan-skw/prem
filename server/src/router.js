@@ -9,6 +9,7 @@ import {
   getAllEmployees,
   getEmployee,
   updateEmployeeData,
+  deleteEmployee,
 } from "./controllers/employeeController.js";
 
 const router = express.Router();
@@ -21,5 +22,6 @@ router.post("/employees", addEmployee);
 router.get("/employees", getAllEmployees);
 router.get("/employees/:id", getEmployee);
 router.put("/employees/:id", updateEmployeeData);
+router.delete("/employees/:id", deleteEmployee);
 
 export default router;

@@ -7,11 +7,6 @@ import SignUpView from "../views/auth/SignUpView.vue";
 import SignInView from "../views/auth/SignInView.vue";
 const routes = [
   {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
-  {
     path: "/signup",
     name: "Sign Up",
     component: SignUpView,

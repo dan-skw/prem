@@ -10,7 +10,9 @@ import router from "./router";
 
 const app = createApp(App);
 
-app.use(PrimeVue);
+app.use(PrimeVue, {
+  ripple: true,
+});
 app.use(ToastService);
 app.use(createPinia());
 app.use(router);

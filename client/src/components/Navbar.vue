@@ -1,38 +1,116 @@
 <template>
-  <nav>
-    <h1><i class="pi pi-users"></i>prem</h1>
-    <RouterLink v-if="!isLoggedIn" to="/signup">Signup</RouterLink>
-    <RouterLink v-if="!isLoggedIn" to="/signin">Signin</RouterLink>
-    <RouterLink v-if="isLoggedIn" to="/protected">Dashboard</RouterLink>
-    <RouterLink v-if="isLoggedIn" :to="`/userpanel/${authStore.user.uid}`"
-      >User Panel</RouterLink
-    >
-    <button v-if="isLoggedIn" @click="logout">Sign Out</button>
-  </nav>
+  <div class="card">
+    <TabMenu :model="items">
+      <template #item="{ item }">
+        <router-link
+          v-if="item.route"
+          v-slot="{ href, navigate }"
+          :to="item.route"
+          custom
+        >
+          <a
+            v-ripple
+            :href="href"
+            @click="navigate"
+            class="p-menuitem-link"
+            :class="{ 'p-disabled': item.disabled }"
+          >
+            <i v-if="item.icon" :class="item.icon" class="p-menuitem-icon"></i>
+            <span class="p-menuitem-text">{{ item.label }}</span>
+          </a>
+        </router-link>
+        <a
+          v-else-if="item.command"
+          v-ripple
+          href="#"
+          @click="item.command"
+          class="p-menuitem-link"
+        >
+          <i v-if="item.icon" :class="item.icon" class="p-menuitem-icon"></i>
+          <span class="p-menuitem-text">{{ item.label }}</span>
+        </a>
+        <a
+          v-else
+          v-ripple
+          :href="item.url"
+          :target="item.target"
+          class="p-menuitem-link"
+        >
+          <i v-if="item.icon" :class="item.icon" class="p-menuitem-icon"></i>
+          <span class="p-menuitem-text">{{ item.label }}</span>
+        </a>
+      </template>
+    </TabMenu>
+  </div>
 </template>
 
 <script setup>
 import { RouterLink, useRouter } from "vue-router";
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
 import { useAuthStore } from "@/stores/authStore";
-import { signUserOut } from "@/firebase/auth/userAuth"; // Adjust the path as necessary
+import { signUserOut } from "@/firebase/auth/userAuth";
+import TabMenu from "primevue/tabmenu";
 
 const authStore = useAuthStore();
-const isLoggedIn = ref(authStore.user !== null);
-const router = useRouter(); // Import and use the useRouter function
+
+const isLoggedIn = computed(() => authStore.user);
+
+const items = computed(() => {
+  const menuItems = [];
+
+  if (isLoggedIn.value) {
+    menuItems.push(
+      {
+        label: "Dashboard",
+        icon: "pi pi-fw pi-chart-bar",
+        route: "/protected",
+      },
+      {
+        label: "Employees",
+        icon: "pi pi-fw pi-users",
+        route: "/protected/employees",
+      },
+      {
+        label: "Reservations",
+        icon: "pi pi-fw pi-book",
+        route: "/protected/reservations",
+      },
+      {
+        label: "User Panel",
+        icon: "pi pi-fw pi-user",
+        route: "/protected/user-panel",
+      },
+      {
+        label: "Sign Out",
+        icon: "pi pi-fw pi-sign-out",
+        command: logout,
+      }
+    );
+  } else {
+    menuItems.push(
+      {
+        label: "Sign In",
+        icon: "pi pi-fw pi-sign-in",
+        route: "/signin",
+      },
+      {
+        label: "Sign Up",
+        icon: "pi pi-fw pi-user-plus",
+        route: "/signup",
+      }
+    );
+  }
+
+  return menuItems;
+});
+
+const router = useRouter();
 
 const logout = async () => {
   await signUserOut();
-  authStore.clearUser(); // Call clearUser instead of setUser(null)
+  authStore.clearUser();
   router.push("/signin");
 };
-
-watch(
-  () => authStore.user,
-  (user) => {
-    isLoggedIn.value = user !== null;
-  }
-);
 </script>
 
 <style>

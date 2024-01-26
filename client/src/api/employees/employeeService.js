@@ -40,3 +40,12 @@ export const updateEmployee = async (id, employeeData) => {
     throw error;
   }
 };
+
+export const deleteEmployee = async (id) => {
+  try {
+    await axios.delete(`${BASE_URL}/employees/${id}`);
+  } catch (error) {
+    console.error("Error deleting employee:", error);
+    throw error;
+  }
+};

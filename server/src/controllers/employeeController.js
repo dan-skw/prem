@@ -63,3 +63,14 @@ export const updateEmployeeData = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+
+export const deleteEmployee = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await db.collection("employees").doc(id).delete();
+    res.status(200).send("Employee deleted successfully");
+  } catch (error) {
+    console.error("Error deleting employee:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};

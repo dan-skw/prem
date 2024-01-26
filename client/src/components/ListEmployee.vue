@@ -1,7 +1,8 @@
 <template>
   <div>
     <h2>Employee List</h2>
-    <DataTable :value="employees">
+    <Loader v-if="loading" />
+    <DataTable :value="employees" v-else>
       <Column field="name" header="Name"></Column>
       <Column field="surname" header="Surname"></Column>
       <Column field="position.name" header="Position"></Column>
@@ -27,19 +28,22 @@ import { getEmployees } from "@/api/employees/employeeService";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Button from "primevue/button";
+import Loader from "./Loader.vue";
 import { useRouter } from "vue-router";
 
 const employees = ref([]);
 const router = useRouter();
+const loading = ref(true);
 
 onMounted(async () => {
   employees.value = await getEmployees();
+  loading.value = false;
 });
 
 const formatDate = (isoString) => {
   const date = new Date(isoString);
   const day = date.getDate().toString().padStart(2, "0");
-  const month = (date.getMonth() + 1).toString().padStart(2, "0"); // January is 0
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
