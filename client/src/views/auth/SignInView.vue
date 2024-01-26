@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent="handleSubmit" class="wrapper">
-    <h1>Sign in to your account</h1>
+    <h1>Zaloguj się</h1>
 
     <div class="input-area">
       <InputGroup>
@@ -18,10 +18,10 @@
         <InputText type="password" placeholder="Hasło" v-model="password" />
       </InputGroup>
     </div>
-    <Button type="submit" label="Sign in" />
+    <Button type="submit" label="ZALOGUJ" />
     <p>
-      If you do not have an account
-      <RouterLink to="/signup">Sign Up</RouterLink>
+      Jeżeli nie masz konta
+      <RouterLink to="/signup">zarejestruj się.</RouterLink>
     </p>
   </form>
 </template>

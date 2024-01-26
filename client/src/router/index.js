@@ -37,30 +37,30 @@ const routes = [
           {
             path: "add",
             name: "Add Employee",
-            component: () => import("../components/AddEmployee.vue"),
+            component: () => import("../components/employees/AddEmployee.vue"),
           },
           {
             path: "list",
             name: "List of Employees",
-            component: () => import("../components/ListEmployee.vue"),
+            component: () => import("../components/employees/ListEmployee.vue"),
           },
           {
             path: "edit/:id",
             name: "Edit Employee",
-            component: () => import("../components/EditEmployee.vue"),
+            component: () => import("../components/employees/EditEmployee.vue"),
           },
         ],
       },
     ],
   },
-  {
-    path: "/userpanel/:id",
-    name: "User Panel",
-    component: () => import("../views/UserPanel.vue"),
-    meta: {
-      requiresAuth: true,
-    },
-  },
+  // {
+  //   path: "/userpanel/:id",
+  //   name: "User Panel",
+  //   component: () => import("../views/UserPanel.vue"),
+  //   meta: {
+  //     requiresAuth: true,
+  //   },
+  // },
 ];
 
 const router = createRouter({

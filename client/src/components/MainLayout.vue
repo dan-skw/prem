@@ -4,18 +4,20 @@
     <main class="content">
       <slot></slot>
     </main>
+    <Footer />
   </div>
-  <Toast />
 </template>
 
 <script setup>
 import Navbar from "./Navbar.vue";
+import Footer from "./Footer.vue";
 </script>
 
 <style scoped>
 .main-layout {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 .content {

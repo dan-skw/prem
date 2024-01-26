@@ -132,3 +132,12 @@ const positions = ref([
 
 const sexOptions = ref(["Mężczyzna", "Kobieta"]);
 </script>
+<style scoped>
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+  margin: 0 auto;
+}
+</style>

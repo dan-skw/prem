@@ -61,27 +61,27 @@ const items = computed(() => {
   if (isLoggedIn.value) {
     menuItems.push(
       {
-        label: "Dashboard",
+        label: "PREM",
         icon: "pi pi-fw pi-chart-bar",
         route: "/protected",
       },
       {
-        label: "Employees",
+        label: "Pracownicy",
         icon: "pi pi-fw pi-users",
         route: "/protected/employees",
       },
       {
-        label: "Reservations",
+        label: "Rezerwacje",
         icon: "pi pi-fw pi-book",
         route: "/protected/reservations",
       },
+      // {
+      //   label: "User Panel",
+      //   icon: "pi pi-fw pi-user",
+      //   route: "/protected/user-panel",
+      // },
       {
-        label: "User Panel",
-        icon: "pi pi-fw pi-user",
-        route: "/protected/user-panel",
-      },
-      {
-        label: "Sign Out",
+        label: "Wyloguj",
         icon: "pi pi-fw pi-sign-out",
         command: logout,
       }

@@ -1,14 +1,16 @@
 <template>
-  <EmployeeForm
-    :initialEmployeeData="employee"
-    buttonText="Zaaktualizuj dane"
-    @submit="handleUpdateEmployee"
-  />
-  <Button
-    label="Delete Employee"
-    @click="deleteCurrentEmployee"
-    class="p-button-danger"
-  />
+  <section>
+    <EmployeeForm
+      :initialEmployeeData="employee"
+      buttonText="Zaaktualizuj dane"
+      @submit="handleUpdateEmployee"
+    />
+    <Button
+      label="Usuń pracownika"
+      @click="deleteCurrentEmployee"
+      class="p-button-danger"
+    />
+  </section>
 </template>
 
 <script setup>
@@ -18,7 +20,7 @@ import {
   getEmployee,
   updateEmployee,
   deleteEmployee,
-} from "@/api/employees/employeeService";
+} from "@/services/employeeService";
 import { useRoute } from "vue-router";
 import { useToast } from "primevue/usetoast";
 import router from "@/router";
@@ -69,3 +71,12 @@ const deleteCurrentEmployee = async () => {
   }
 };
 </script>
+<style scoped>
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+</style>

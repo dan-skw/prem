@@ -1,34 +1,34 @@
 <template>
-  <div>
-    <h2>Employee List</h2>
+  <section class="wrapper">
+    <h2>Lista obecnych pracowników</h2>
     <Loader v-if="loading" />
     <DataTable :value="employees" v-else>
-      <Column field="name" header="Name"></Column>
-      <Column field="surname" header="Surname"></Column>
-      <Column field="position.name" header="Position"></Column>
-      <Column header="Birthdate">
+      <Column field="name" header="Imię"></Column>
+      <Column field="surname" header="Nazwisko"></Column>
+      <Column field="position.name" header="Stanowisko"></Column>
+      <Column header="Data urodzenia">
         <template #body="slotProps">
           {{ formatDate(slotProps.data.birthdate) }}
         </template>
       </Column>
-      <Column field="sex" header="Sex"></Column>
-      <Column field="hourlyRate" header="Hourly Rate"></Column>
-      <Column header="Edit">
+      <Column field="sex" header="Płeć"></Column>
+      <Column field="hourlyRate" header="Stawka godzinowa"></Column>
+      <Column header="Edytuj">
         <template #body="slotProps">
           <Button icon="pi pi-pencil" @click="editEmployee(slotProps.data)" />
         </template>
       </Column>
     </DataTable>
-  </div>
+  </section>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { getEmployees } from "@/api/employees/employeeService";
+import { getEmployees } from "@/services/employeeService";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Button from "primevue/button";
-import Loader from "./Loader.vue";
+import Loader from "../Loader.vue";
 import { useRouter } from "vue-router";
 
 const employees = ref([]);
@@ -52,3 +52,12 @@ const editEmployee = (employee) => {
   router.push({ name: "Edit Employee", params: { id: employee.id } });
 };
 </script>
+<style scoped>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+</style>

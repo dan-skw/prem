@@ -1,24 +1,7 @@
-<script setup>
-import { getItems } from "../api/getItems";
-import { ref, onMounted } from "vue";
-
-const items = ref([]);
-
-onMounted(async () => {
-  items.value = await getItems();
-  console.log(items.value);
-});
-</script>
+<script setup></script>
 
 <template>
-  <main>
-    <h1>Home</h1>
-    <ul>
-      <li v-for="item in items" :key="item.id">
-        {{ item.name }}
-      </li>
-    </ul>
-  </main>
+  <main></main>
 </template>
 <style scoped>
 main {
