@@ -1,12 +1,8 @@
-import admin from "../firebaseAdmin.js"; // Adjust the path as needed
+import db from "../firebaseAdmin.js";
 
 export const getUser = async (req, res) => {
   try {
-    const doc = await admin
-      .firestore()
-      .collection("Users")
-      .doc(req.params.uid)
-      .get();
+    const doc = await db.collection("Users").doc(req.params.uid).get();
     if (doc.exists) {
       res.json(doc.data());
     } else {
@@ -20,7 +16,7 @@ export const getUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   try {
     const { name, surname, birthDate, hourlyRate } = req.body;
-    await admin.firestore().collection("Users").doc(req.params.uid).set({
+    await db.collection("Users").doc(req.params.uid).set({
       name,
       surname,
       birthDate,

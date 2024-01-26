@@ -36,12 +36,10 @@ import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/authStore";
 import { getUserData, updateUserData } from "@/services/userService";
 
-import MainLayout from "@/components/MainLayout.vue";
 import InputGroup from "primevue/inputgroup";
 import InputGroupAddon from "primevue/inputgroupaddon";
 import InputText from "primevue/inputtext";
 import Calendar from "primevue/calendar";
-import InputMask from "primevue/inputmask";
 import Button from "primevue/button";
 
 const router = useRouter();

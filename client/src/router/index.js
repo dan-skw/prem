@@ -28,6 +28,13 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
+    children: [
+      {
+        path: "reservations",
+        name: "Reservations",
+        component: () => import("../views/Reservations.vue"),
+      },
+    ],
   },
   {
     path: "/userpanel/:id",
